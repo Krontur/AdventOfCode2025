@@ -44,4 +44,20 @@ public class InvalidIDFinderTest {
         assert result == 38437576669L;
     }
 
+    @Test
+    void testExampleFindInvalidIDSumPart2(){
+        String[] input = getInputFromResource("./day2_gift_shop/exampleinput.txt");
+        long result = InvalidIDFinder.findInvalidIDSumPart2(input);
+        System.out.println("Example invalid ID sum: " + result);
+        assert result == 4174379265L;
+    }
+
+    @Test
+    void testInputFindInvalidIDSumPart2(){
+        String[] input = getInputFromResource("./day2_gift_shop/input.txt");
+        long result = InvalidIDFinder.findInvalidIDSumPart2(input);
+        System.out.println("Example invalid ID sum: " + result);
+        assert result == 49046150754L;
+    }
+
 }
