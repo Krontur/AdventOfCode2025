@@ -13,7 +13,7 @@ public class SecretEntranceDecoderTest {
 
     @Test
     void shouldCountPasswordsFromInputFile() throws IOException {
-        Path p = Paths.get("src", "main", "java", "com", "krontur", "adventofcode2025", "day1_secret_entrance", "input.txt");
+        Path p = Paths.get("src", "main", "resources", "day1_secret_entrance", "input.txt");
         try (BufferedReader br = Files.newBufferedReader(p)) {
             int password = SecretEntranceDecoder.decoder(br);
             assertEquals(1180, password);
@@ -22,7 +22,7 @@ public class SecretEntranceDecoderTest {
 
     @Test
     void shouldCountPasswordsFromExampleInputFile() throws IOException {
-        Path p = Paths.get("src", "main", "java", "com", "krontur", "adventofcode2025", "day1_secret_entrance", "testinput.txt");
+        Path p = Paths.get("src", "main", "resources", "day1_secret_entrance", "testinput.txt");
         try (BufferedReader br = Files.newBufferedReader(p)) {
             int password = SecretEntranceDecoder.decoder(br);
             assertEquals(3, password);
@@ -50,7 +50,7 @@ public class SecretEntranceDecoderTest {
 
     @Test
     void shouldCountPasswordsFromInputFilePart2() throws IOException {
-        Path p = Paths.get("src", "main", "java", "com", "krontur", "adventofcode2025", "day1_secret_entrance", "input.txt");
+        Path p = Paths.get("src", "main", "resources", "day1_secret_entrance", "input.txt");
         try (BufferedReader br = Files.newBufferedReader(p)) {
             int password = SecretEntranceDecoder.decoder2(br);
             assertEquals(6892, password);
@@ -59,7 +59,7 @@ public class SecretEntranceDecoderTest {
 
     @Test
     void shouldCountPasswordsFromExampleInputFilePart2() throws IOException {
-        Path p = Paths.get("src", "main", "java", "com", "krontur", "adventofcode2025", "day1_secret_entrance", "testinput.txt");
+        Path p = Paths.get("src", "main", "resources", "day1_secret_entrance", "testinput.txt");
         try (BufferedReader br = Files.newBufferedReader(p)) {
             int password = SecretEntranceDecoder.decoder2(br);
             assertEquals(6, password);
