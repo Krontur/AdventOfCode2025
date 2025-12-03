@@ -47,4 +47,41 @@ public class SecretEntranceDecoderTest {
             assertEquals(2, password);
         }
     }
+
+    @Test
+    void shouldCountPasswordsFromInputFilePart2() throws IOException {
+        Path p = Paths.get("src", "main", "java", "com", "krontur", "adventofcode2025", "day1_secret_entrance", "input.txt");
+        try (BufferedReader br = Files.newBufferedReader(p)) {
+            int password = SecretEntranceDecoder.decoder2(br);
+            assertEquals(6892, password);
+        }
+    }
+
+    @Test
+    void shouldCountPasswordsFromExampleInputFilePart2() throws IOException {
+        Path p = Paths.get("src", "main", "java", "com", "krontur", "adventofcode2025", "day1_secret_entrance", "testinput.txt");
+        try (BufferedReader br = Files.newBufferedReader(p)) {
+            int password = SecretEntranceDecoder.decoder2(br);
+            assertEquals(6, password);
+        }
+    }
+
+    @Test
+    void shouldHandleWrapAroundScenarios2() throws IOException {
+        String data = """
+                R50
+                L1
+                L99
+                R100
+                L101
+                L51
+                R150
+                L250
+                R0
+                """;
+        try (BufferedReader reader = new BufferedReader(new StringReader(data))) {
+            int password = SecretEntranceDecoder.decoder2(reader);
+            assertEquals(7, password);
+        }
+    }
 }
