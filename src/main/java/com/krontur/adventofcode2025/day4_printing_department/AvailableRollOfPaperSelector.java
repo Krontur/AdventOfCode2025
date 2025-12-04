@@ -36,6 +36,7 @@ public class AvailableRollOfPaperSelector {
         System.out.println("Starting to evaluate grid for available roll of paper..." + adyacentDirections.length);
 
         int selectedRolls = 0;
+
         for(int row = 0; row < grid.size(); row++){
             for(int col = 0; col < grid.get(row).size(); col++){
                 System.out.println("Evaluating cell at (" + row + ", " + col + ") with value: " + grid.get(col).get(row));
@@ -46,8 +47,8 @@ public class AvailableRollOfPaperSelector {
                     int rollPaperAdjacent = 0;
                     for (int[] adyacentDirection : adyacentDirections) {
                         System.out.println("Checking cell at (" + row + ", " + col + ") in direction (" + adyacentDirection[0] + ", " + adyacentDirection[1] + ")");
-                        int newRow = row + adyacentDirection[1];
-                        int newCol = col + adyacentDirection[0];
+                        int newRow = row + adyacentDirection[0];
+                        int newCol = col + adyacentDirection[1];
                         if (newRow >= 0 && newRow < grid.size() && newCol >= 0 && newCol < grid.getFirst().size()) {
                             if (grid.get(newRow).get(newCol) == '@') {
                                 rollPaperAdjacent++;
@@ -66,5 +67,81 @@ public class AvailableRollOfPaperSelector {
         }
         System.out.println("Available roll of paper evaluation completed." + selectedRolls);
         return selectedRolls;
+    }
+
+
+    public static int selectAllAvailableRollOfPaper(BufferedReader br) throws IOException {
+
+        List<List<Character>> grid = new ArrayList<>();
+
+        if(br==null) return -1;
+        while(br.ready()){
+            String line = br.readLine();
+            if(line == null || line.isEmpty()) break;
+            grid.add(new ArrayList<>());
+            for(char c : line.toCharArray()){
+                grid.getLast().add(c);
+            }
+        }
+        System.out.println("Grid loaded: " + grid);
+
+        int[][] adyacentDirections = {
+                {-1, 0}, // up
+                {1, 0},  // down
+                {0, -1}, // left
+                {0, 1},  // right
+                {-1, -1}, // up-left
+                {-1, 1},  // up-right
+                {1, -1},  // down-left
+                {1, 1}    // down-right
+        };
+
+        System.out.println("Starting to evaluate grid for available roll of paper..." + adyacentDirections.length);
+
+        int availableRolls = 0;
+        int selectedRolls;
+
+        do {
+            selectedRolls = 0;
+            List<List<Character>> tempGrid = new ArrayList<>(grid.size());
+            for (List<Character> row : grid) {
+                tempGrid.add(new ArrayList<>(row));
+            }
+            for(int row = 0; row < grid.size(); row++){
+                for(int col = 0; col < grid.get(row).size(); col++){
+                    System.out.println("Evaluating cell at (" + row + ", " + col + ") with value: " + grid.get(col).get(row));
+                    if(grid.get(row).get(col) == '.'){
+                        System.out.println("Cell at (" + row + ", " + col + ") is empty ('.'), skipping.");
+                    } else {
+                        System.out.println("Cell at (" + row + ", " + col + ") contains roll of paper ('@'), checking adjacent cells...");
+                        int rollPaperAdjacent = 0;
+                        for (int[] adyacentDirection : adyacentDirections) {
+                            System.out.println("Checking cell at (" + row + ", " + col + ") in direction (" + adyacentDirection[0] + ", " + adyacentDirection[1] + ")");
+                            int newRow = row + adyacentDirection[0];
+                            int newCol = col + adyacentDirection[1];
+                            if (newRow >= 0 && newRow < grid.size() && newCol >= 0 && newCol < grid.getFirst().size()) {
+                                if (grid.get(newRow).get(newCol) == '@') {
+                                    System.out.println("Found adjacent roll of paper at (" + newRow + ", " + newCol + ")");
+                                    rollPaperAdjacent++;
+                                }
+                            } else {
+                                System.out.println("Cell at (" + newRow + ", " + newCol + ") is out of bounds, skipping.");
+                            }
+                        }
+                        if(rollPaperAdjacent < 4) {
+                            selectedRolls++;
+                            tempGrid.get(row).set(col, '.');
+                            System.out.println("Selected roll of paper at (" + row + ", " + col + "). Total selected: " + selectedRolls);
+                        }
+                    }
+
+                }
+            }
+            grid = tempGrid;
+            availableRolls += selectedRolls;
+            System.out.println("Grid updated for next iteration: " + grid);
+        } while (selectedRolls > 0);
+
+        return availableRolls;
     }
 }

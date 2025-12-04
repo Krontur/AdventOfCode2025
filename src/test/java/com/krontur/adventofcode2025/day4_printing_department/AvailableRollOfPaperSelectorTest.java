@@ -32,4 +32,26 @@ public class AvailableRollOfPaperSelectorTest {
 
     }
 
+    @Test
+    void allAvailableInLoopRollOfPaperSelectorExampleInputTest() throws IOException {
+
+        Path p = Paths.get("src", "main", "resources", "day4_printing_department", "exampleinput.txt");
+        BufferedReader br = Files.newBufferedReader(p);
+        int result = AvailableRollOfPaperSelector.selectAllAvailableRollOfPaper(br);
+        System.out.println("Example available roll of paper selector result: " + result);
+        assert result == 43;
+
+    }
+
+    @Test
+    void allAvailableInLoopRollOfPaperSelectorInputTest() throws IOException {
+
+        Path p = Paths.get("src", "main", "resources", "day4_printing_department", "input.txt");
+        BufferedReader br = Files.newBufferedReader(p);
+        int result = AvailableRollOfPaperSelector.selectAllAvailableRollOfPaper(br);
+        System.out.println("Example available roll of paper selector result: " + result);
+        assert result == 8493;
+
+    }
+
 }
