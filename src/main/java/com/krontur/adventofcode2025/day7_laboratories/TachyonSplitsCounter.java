@@ -44,7 +44,6 @@ public class TachyonSplitsCounter {
 
         List<char[]> grid = new ArrayList<>();
 
-        // Leer toda la rejilla
         String line;
         while ((line = br.readLine()) != null && !line.isEmpty()) {
             grid.add(line.toCharArray());
@@ -54,8 +53,8 @@ public class TachyonSplitsCounter {
 
         int cols = grid.getFirst().length;
 
-        long[] tachyonSplitsPositions = new long[cols];   // mundos/tachyones por columna
-        long[] accumulatorPositions  = new long[cols];   // acumulado total por columna (solo para debug)
+        long[] tachyonSplitsPositions = new long[cols]; 
+        long[] accumulatorPositions  = new long[cols];
 
         boolean foundS = false;
 
@@ -76,22 +75,19 @@ public class TachyonSplitsCounter {
                     long tachyonsHere = tachyonSplitsPositions[col];
 
                     if (tachyonsHere > 0) {
-                        // Acumulamos impacto en este divisor
+                        
                         accumulatorPositions[col] += tachyonsHere;
 
-                        // Se reparten, así que vaciamos la celda actual
                         tachyonSplitsPositions[col] = 0L;
 
                         if (col == 0) {
-                            // Borde izquierdo → solo derecha
+                            
                             tachyonSplitsPositions[col + 1] += tachyonsHere;
 
                         } else if (col == currentRow.length - 1) {
-                            // Borde derecho → solo izquierda
                             tachyonSplitsPositions[col - 1] += tachyonsHere;
 
                         } else {
-                            // Centro → izquierda y derecha
                             tachyonSplitsPositions[col - 1] += tachyonsHere;
                             tachyonSplitsPositions[col + 1] += tachyonsHere;
                         }
@@ -105,7 +101,6 @@ public class TachyonSplitsCounter {
             );
         }
 
-        // ✅ SUMA FINAL DE TODOS LOS ACUMULADOS
         long totalTimelines = 0L;
         for (long value : accumulatorPositions) {
             totalTimelines += value;
