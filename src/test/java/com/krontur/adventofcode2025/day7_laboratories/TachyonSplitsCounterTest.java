@@ -40,4 +40,34 @@ public class TachyonSplitsCounterTest {
         assert result == 1698;
     }
 
+    @Test
+    void countTachyonSplitsManyWorldsFromExampleInputTest() {
+        Path p = Paths.get("src", "main", "resources", "day7_laboratories", "exampleinput.txt");
+        BufferedReader br;
+        long result;
+        try {
+            br = Files.newBufferedReader(p);
+            result = TachyonSplitsCounter.countTachyonSplitsManyWorlds(br);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Tachyon splits count: " + result);
+        assert result == 40;
+    }
+
+    @Test
+    void countTachyonSplitsManyWorldsFromInputTest() {
+        Path p = Paths.get("src", "main", "resources", "day7_laboratories", "input.txt");
+        BufferedReader br;
+        long result;
+        try {
+            br = Files.newBufferedReader(p);
+            result = TachyonSplitsCounter.countTachyonSplitsManyWorlds(br);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Tachyon splits count: " + result);
+        assert result == 95408386769474L;
+    }
+
 }
