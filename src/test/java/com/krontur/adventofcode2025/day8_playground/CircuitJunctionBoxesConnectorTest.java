@@ -31,9 +31,9 @@ public class CircuitJunctionBoxesConnectorTest {
         BufferedReader br;
         try {
             br = Files.newBufferedReader(p);
-            int result = CircuitJunctionBoxesConnector.getConnectedBoxesCount(br, 1000);
-            System.out.println("Example circuit junction boxes connector result: " + result);
-            assert result == 40;
+            long result = CircuitJunctionBoxesConnector.getConnectedBoxesCountTogether(br);
+            System.out.println("Product of their X coordinates result: " + result);
+            assert result == 772452514L;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
