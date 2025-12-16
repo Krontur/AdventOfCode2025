@@ -22,8 +22,6 @@ public class BiggestRectangleFinderTest {
         } catch (Exception e){
             throw new RuntimeException(e);
         }
-
-
     }
 
     @Test
@@ -40,8 +38,38 @@ public class BiggestRectangleFinderTest {
         } catch (Exception e){
             throw new RuntimeException(e);
         }
+    }
 
+    @Test
+    public void getBiggestValidRectangleFromExampleInputTest() {
 
+        Path p = Path.of("src/main/resources/day9_movie_theater/exampleinput.txt");
+        BufferedReader br;
+
+        try {
+            br = Files.newBufferedReader(p);
+            long result = BiggestRectangleFinder.getBiggestValidRectangleArea(br);
+            System.out.println("Example biggest rectangle area result: " + result);
+            assert result == 24L;
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void getBiggestValidRectangleFromInputTest() {
+
+        Path p = Path.of("src/main/resources/day9_movie_theater/input.txt");
+        BufferedReader br;
+
+        try {
+            br = Files.newBufferedReader(p);
+            long result = BiggestRectangleFinder.getBiggestValidRectangleArea(br);
+            System.out.println("Biggest rectangle area result: " + result);
+            assert result == 1343576598L;
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
 }
